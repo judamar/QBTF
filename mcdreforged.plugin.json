@@ -1,0 +1,11 @@
+{
+	"id": "qbtf",
+	"version": "1.0.0",
+	"name": "qbtf",
+	"description": "!!qbtf para subir el ultimo backup (slot 1) a firebase storage",
+	"author": "judamar",
+	"link": "https://github.com/judamar/QBTF",
+	"dependencies": {
+		"mcdreforged": ">=2.0.0-alpha.1"
+	}
+}
