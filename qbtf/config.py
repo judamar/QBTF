@@ -6,11 +6,11 @@ from mcdreforged.api.all import ServerInterface
 # program
 class Configure(Serializable):
     command: str = '!!qbtf'
-    source_path: str = '/foo/bar/qb_multi/slot1'
+    source_path: str = './qb_multi/slot1'
     firebase_config: dict = {"databaseURL": ""}
     permission: int = 0
     zip_name: str = 'qb_comp.zip'
-    fb_path: str = 'ssp/qb_comp.zip'
+    fb_path: str = 'smp/'
 
 
 # Getting the server interface for the plugin.
