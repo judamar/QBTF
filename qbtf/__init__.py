@@ -8,7 +8,7 @@ conf = Configure
 def comprimir_qb(server: PluginServerInterface): #It compresses the source code of the plugin into a zip file.
 	psi.logger.info("§3Compressing...§r")
 	try:
-		shutil.make_archive('qb_comp', 'zip', conf.source_path)
+		shutil.make_archive(conf.comp_name, 'zip', conf.source_path)
 		psi.logger.info("§a[+]§r DONE")
 	except:
 		psi.logger.info("§c[-]§r Epic fail")
@@ -18,8 +18,8 @@ def subirAFirebase(server: PluginServerInterface): #It uploads the zip file to F
     storage = firebase.storage()
     psi.logger.info("§3Uploading to Firebase...§r")
     try:
-        file = conf.zip_name
-        cloudfilename = (conf.fb_path)
+        file = conf.comp_name + '.zip'
+        cloudfilename = (conf.fb_path + file)
         storage.child(cloudfilename).put(file)
         psi.logger.info("§a[+]§r DONE")
     except:
