@@ -16,7 +16,7 @@
 
 [![overview.png](https://i.postimg.cc/9Xk6vqwf/overview.png)](https://postimg.cc/w3h4NMVK)
 
-8. Copias el contenido de la variable `firebaseConfig` y lo pegas en la misma variable dentro del archivo de configuración del plugin pero como si fuera diccionario es decir, llave y contenido dentro de `""` dejando la ultima llave (databaseURL) y le das Continuar a la consola.
+8. Copias el contenido de la variable `firebaseConfig` y lo pegas en la misma variable dentro del archivo de configuración del plugin pero como si fuera [diccionario](https://youtube.com/clip/Ugkxc8d-DNlt49jpA5VZ0sw9pmpYBv2ZX1xx) es decir, llave y contenido dentro de `""` dejando la ultima llave ("databaseURL": "") y le das Continuar a la consola.
 
 [![key.png](https://i.postimg.cc/76jyMCgb/key.png)](https://postimg.cc/G8PNbmg1)
 
