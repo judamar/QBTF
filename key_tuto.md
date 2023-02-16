@@ -6,18 +6,18 @@
 4. Le das a empezar, siguiente, y hecho. 
 5. Cuando lo tengas creado, en la parte de arriba te saldrá algo como esto. Le das donde dice Rules.
 
-![snapshot](https://raw.githubusercontent.com/judamar/QBTF/blob/main/ss/st_rules.png)
+[![st-rules.png](https://i.postimg.cc/3r9Rp1qc/st-rules.png)](https://postimg.cc/w3ygYXgX)
 
 6. En el apartado Editar Reglas, cambias el `allow read, write: if request.auth != null;` por `allow read, write: if true;` y le das en Pubicar.
 
-![snapshot](https://raw.githubusercontent.com/judamar/QBTF/blob/main/ss/allow_true.png)
+[![allow-true.png](https://i.postimg.cc/VLpzBVWD/allow-true.png)](https://postimg.cc/qzcfpQY3)
 
 7. Vuelves al overview de tu proyecto y le das al `</>` WEB, registras la app sin darle check a nada. Te saldrá un archivo de configuración.
 
-![snapshot](https://raw.githubusercontent.com/judamar/QBTF/blob/main/ss/overview.png)
+[![overview.png](https://i.postimg.cc/9Xk6vqwf/overview.png)](https://postimg.cc/w3h4NMVK)
 
 8. Copias el contenido de la variable `firebaseConfig` y lo pegas en la misma variable dentro del archivo de configuración del plugin pero como si fuera diccionario es decir, llave y contenido dentro de `""` dejando la ultima llave (databaseURL) y le das Continuar a la consola.
 
-![snapshot](https://raw.githubusercontent.com/judamar/QBTF/blob/main/ss/key.png)
+[![key.png](https://i.postimg.cc/76jyMCgb/key.png)](https://postimg.cc/G8PNbmg1)
 
 Ya podrías correr el plugin de forma correcta.
