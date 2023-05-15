@@ -8,6 +8,11 @@ pip install pycryptodome
 pip install pyrebase4
 ```
 
+Si al iniciar el server sale un error como este `ImportError: cannot import name 'gaecontrib' from 'requests_toolbelt._compat'`, se soluciona instalando una version anterior al requests-toolbelt con el siguiente comando:
+```
+pip install requests-toolbelt==0.10.1
+```
+
 Este plugin toma el backup del `slot 1` hecho por el [QuickBackupM](https://github.com/TISUnion/QuickBackupM), lo comprime en formato `.zip` y lo sube al storage de firebase.
 
 ## Configurar el archivo config.json
