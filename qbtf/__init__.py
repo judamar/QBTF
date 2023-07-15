@@ -6,24 +6,30 @@ from qbtf.config import *
 conf = Configure
 
 def comprimir_qb(server: PluginServerInterface): #It compresses the source code of the plugin into a zip file.
-	psi.logger.info("§3Compressing...§r")
+	server.get_server().logger.info("§a[+]§r §3Compressing...§r")
+	server.get_server().say("§a[+]§r §3Compressing...§r")
 	try:
 		shutil.make_archive(conf.comp_name, 'zip', conf.source_path)
-		psi.logger.info("§a[+]§r DONE")
+		server.get_server().logger.info("§a[+]§r DONE")
+		server.get_server().say("§a[+]§r DONE")
 	except:
-		psi.logger.info("§c[-]§r Epic fail")
+		server.get_server().logger.info("§c[-]§r Epic fail")
+		server.get_server().say("§c[-]§r Epic fail")
 
 def subirAFirebase(server: PluginServerInterface): #It uploads the zip file to Firebase Storage
     firebase = pyrebase.initialize_app(conf.firebase_config)
     storage = firebase.storage()
-    psi.logger.info("§3Uploading to Firebase...§r")
+    server.get_server().logger.info("§a[+]§r §3Uploading to Firebase...§r")
+    server.get_server().say("§a[+]§r §3Uploading to Firebase...§r")
     try:
         file = conf.comp_name + '.zip'
         cloudfilename = (conf.fb_path + file)
         storage.child(cloudfilename).put(file)
-        psi.logger.info("§a[+]§r DONE")
+        server.get_server().logger.info("§a[+]§r DONE")
+        server.get_server().say("§a[+]§r DONE")
     except:
-        psi.logger.info("§c[-]§r Epic fail")
+        server.get_server().logger.info("§c[-]§r Epic fail")
+        server.get_server().say("§c[-]§r Epic fail")
 
 def execute(server: PluginServerInterface): #Executes 'comprimir_qb' and 'subirAFirebase' functions
 	comprimir_qb(server)
