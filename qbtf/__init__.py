@@ -5,31 +5,31 @@ from qbtf.config import *
 
 conf = Configure
 
+def print_msg(server: PluginServerInterface, msg: str, prefix='[QBTF] '):
+	msg = RTextList(prefix, msg)
+	server.get_server().logger.info(msg)
+	server.get_server().say(msg)
+
 def comprimir_qb(server: PluginServerInterface): #It compresses the source code of the plugin into a zip file.
-	server.get_server().logger.info("§a[+]§r §3Compressing...§r")
-	server.get_server().say("§a[+]§r §3Compressing...§r")
+	print_msg(server, "§a[+]§r §3Compressing...§r")
 	try:
 		shutil.make_archive(conf.comp_name, 'zip', conf.source_path)
-		server.get_server().logger.info("§a[+]§r DONE")
-		server.get_server().say("§a[+]§r DONE")
+		print_msg(server, "§a[+]§r DONE")
 	except:
-		server.get_server().logger.info("§c[-]§r Epic fail")
-		server.get_server().say("§c[-]§r Epic fail")
+		print_msg(server, "§c[-]§r Epic fail")
 
 def subirAFirebase(server: PluginServerInterface): #It uploads the zip file to Firebase Storage
-    firebase = pyrebase.initialize_app(conf.firebase_config)
-    storage = firebase.storage()
-    server.get_server().logger.info("§a[+]§r §3Uploading to Firebase...§r")
-    server.get_server().say("§a[+]§r §3Uploading to Firebase...§r")
+    print_msg(server, "§a[+]§r §3Uploading to Firebase...§r")
     try:
+        firebase = pyrebase.initialize_app(conf.firebase_config)
+        storage = firebase.storage()
         file = conf.comp_name + '.zip'
         cloudfilename = (conf.fb_path + file)
         storage.child(cloudfilename).put(file)
-        server.get_server().logger.info("§a[+]§r DONE")
-        server.get_server().say("§a[+]§r DONE")
-    except:
-        server.get_server().logger.info("§c[-]§r Epic fail")
-        server.get_server().say("§c[-]§r Epic fail")
+        print_msg(server, "§a[+]§r DONE")
+    except KeyError:
+        print_msg(server, "§c[-]§r ERROR")
+        print_msg(server, "§c[-]§r You must fill the 'firebase_config' field in the plugin configuration file.")
 
 def execute(server: PluginServerInterface): #Executes 'comprimir_qb' and 'subirAFirebase' functions
 	comprimir_qb(server)
