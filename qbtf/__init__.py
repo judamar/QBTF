@@ -31,6 +31,7 @@ def subirAFirebase(server: PluginServerInterface): #It uploads the zip file to F
         print_msg(server, "§c[-]§r ERROR")
         print_msg(server, "§c[-]§r You must fill the 'firebase_config' field in the plugin configuration file.")
 
+@new_thread("QBTF execution")
 def execute(server: PluginServerInterface): #Executes 'comprimir_qb' and 'subirAFirebase' functions
 	comprimir_qb(server)
 	subirAFirebase(server)
