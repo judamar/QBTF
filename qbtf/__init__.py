@@ -28,6 +28,7 @@ def extract_qb(server: PluginServerInterface): #It extracts the source code of t
 	except:
 		print_msg(server, "§c[-]§r Epic fail")
 
+#TODO: remove qb_comp after uploading
 def upload_to_firebase(server: PluginServerInterface): #It uploads the zip file to Firebase Storage
     print_msg(server, "§a[+]§r §3Uploading to Firebase...§r")
     try:
