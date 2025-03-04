@@ -2,28 +2,35 @@ import shutil
 import pyrebase
 from mcdreforged.api.all import *
 from qbtf.config import *
+import os
 
 conf = Configure
+out_path = conf.dest_path+conf.comp_name #It defines the path where the zip file will be saved
 
 def print_msg(server: PluginServerInterface, msg: str, prefix='[QBTF] '):
 	msg = RTextList(prefix, msg)
 	server.get_server().logger.info(msg)
 	server.get_server().say(msg)
 
-#TODO: put the qb_comp in the dest path
+def check_folder(server: PluginServerInterface): #It checks if the folder exists, if not, it creates it.
+	if not os.path.exists(conf.dest_path):
+		os.makedirs(conf.dest_path)
+		server.logger.info("dest_path folder created")
+
 def compress_qb(server: PluginServerInterface): #It compresses the source code of the plugin into a zip file.
 	print_msg(server, "§a[+]§r §3Compressing...§r")
 	try:
-		shutil.make_archive(conf.comp_name, 'zip', conf.source_path, conf.dest_path)
+		shutil.make_archive(out_path, conf.extension, conf.source_path)
 		print_msg(server, "§a[+]§r DONE")
-	except:
+	except Exception as error:
 		print_msg(server, "§c[-]§r Epic fail")
+		server.get_server().logger.exception("ERROR while compressing the plugin")
 
 #TODO: remove slot1 content, and put the qb_comp content in the slot1
 def extract_qb(server: PluginServerInterface): #It extracts the source code of the plugin from the zip file.
 	print_msg(server, "§a[+]§r §3Extracting...§r")
 	try:
-		shutil.unpack_archive(conf.comp_name + conf.extension, conf.source_path, 'zip')
+		shutil.unpack_archive(conf.comp_name + conf.extension, conf.source_path, conf.extension)
 		print_msg(server, "§a[+]§r DONE")
 	except:
 		print_msg(server, "§c[-]§r Epic fail")
@@ -58,11 +65,12 @@ def download_from_firebase(server: PluginServerInterface): #It downloads the zip
 @new_thread("QBTF execution")
 def execute(server: PluginServerInterface): #Executes 'comprimir_qb' and 'subirAFirebase' functions
 	compress_qb(server)
-	upload_to_firebase(server)
+	#upload_to_firebase(server)
 
 #TODO: add !!qbtf upload and !!qbtf download commands using .then()
 def on_load(server: PluginServerInterface, old_module):
 	global conf #do conf global
+	check_folder(server) #check folder
 	conf = server.load_config_simple('config.json', target_class=Configure) #load config.json file to conf
 	msg = 'Plugin qbtf loaded, use {}'.format(conf.command) #message showed when server start
 	server.logger.info(msg) #displays message

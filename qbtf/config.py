@@ -4,11 +4,11 @@ from mcdreforged.api.utils.serializer import Serializable
 class Configure(Serializable):
     command: str = '!!qbtf'
     source_path: str = './qb_multi/slot1'
-    dest_path: str = './qbtf'
+    dest_path: str = './qbtf/'
     firebase_config: dict = {"databaseURL": ""}
     permission: int = 0
     comp_name: str = 'qb_comp'
-    extension: str = '.zip'
+    extension: str = 'zip'
     fb_path: str = 'smp/'
 
 # Defining a variable called `help_message` and assigning it the value of the string
