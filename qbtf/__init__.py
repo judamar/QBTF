@@ -2,10 +2,12 @@ import shutil
 import pyrebase
 from mcdreforged.api.all import *
 from qbtf.config import *
+from qbtf.UI import *
 import os
 
 conf = Configure
 out_path = conf.dest_path+conf.comp_name #It defines the path where the zip file will be saved
+unknown_argument_msg = gen_unknown_argument_message()
 
 def print_msg(server: PluginServerInterface, msg: str, prefix='[QBTF] '):
 	msg = RTextList(prefix, msg)
@@ -65,15 +67,31 @@ def download_from_firebase(server: PluginServerInterface): #It downloads the zip
         print_msg(server, "§c[-]§r ERROR")
         print_msg(server, "§c[-]§r You must fill the 'firebase_config' field in the plugin configuration file.")
 
-#TODO: add help message (!!qbtf upload and !!qbtf download)
-def help_message(server: PluginServerInterface, info: Info): #It shows the help message
-	pass
+def upload():
+  compress_qb()
+  upload_to_firebase()
 
-#FIXME: remove execute function and add !!qbtf upload and !!qbtf download commands in the on_load function
-@new_thread("QBTF execution")
-def execute(server: PluginServerInterface): #Executes 'comprimir_qb' and 'subirAFirebase' functions
-  compress_qb(server)
-  upload_to_firebase(server)
+def download():
+  download_from_firebase()
+  extract_qb()
+
+#|REGISTER COMMANDS|    
+def register_command(server: PluginServerInterface):
+  def get_literal_node(literal):
+    lvl = conf.permission
+    return Literal(literal).requires(lambda src: src.has_permission(lvl)).on_error(RequirementNotMet, lambda src: src.reply("Permission denied"), handled=True)
+
+  server.register_command(
+    Literal(conf.prefix).
+      runs(lambda src: src.reply(gen_help_message())).
+        on_error(UnknownArgument, lambda src, _: print_msg(server, unknown_argument_msg), handled=True).
+          then(
+            get_literal_node('upload').runs(lambda src, ctx: upload())
+            ).
+          then(
+            get_literal_node('download').runs(lambda src, ctx: download())
+          )
+    )
 
 #TODO: add !!qbtf upload and !!qbtf download commands using .then()
 def on_load(server: PluginServerInterface, old_module):
@@ -82,7 +100,5 @@ def on_load(server: PluginServerInterface, old_module):
   conf = server.load_config_simple('config.json', target_class=Configure) #load config.json file to conf
   msg = 'Plugin qbtf loaded, use {}'.format(conf.prefix) #message showed when server start
   server.logger.info(msg) #displays message
-  server.register_command(
-		Literal(conf.prefix)
-		.runs(execute)) #execute plugin
+  register_command(server) #register command
   server.register_help_message(conf.prefix, {'en_us': help_message}) # when !!help it shows help message
