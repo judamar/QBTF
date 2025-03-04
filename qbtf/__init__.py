@@ -65,6 +65,11 @@ def download_from_firebase(server: PluginServerInterface): #It downloads the zip
         print_msg(server, "§c[-]§r ERROR")
         print_msg(server, "§c[-]§r You must fill the 'firebase_config' field in the plugin configuration file.")
 
+#TODO: add help message (!!qbtf upload and !!qbtf download)
+def help_message(server: PluginServerInterface, info: Info): #It shows the help message
+	pass
+
+#FIXME: remove execute function and add !!qbtf upload and !!qbtf download commands in the on_load function
 @new_thread("QBTF execution")
 def execute(server: PluginServerInterface): #Executes 'comprimir_qb' and 'subirAFirebase' functions
   compress_qb(server)
@@ -75,7 +80,9 @@ def on_load(server: PluginServerInterface, old_module):
   global conf #do conf global
   check_folder(server) #check folder
   conf = server.load_config_simple('config.json', target_class=Configure) #load config.json file to conf
-  msg = 'Plugin qbtf loaded, use {}'.format(conf.command) #message showed when server start
+  msg = 'Plugin qbtf loaded, use {}'.format(conf.prefix) #message showed when server start
   server.logger.info(msg) #displays message
-  server.register_command(Literal(conf.command).runs(execute)) #execute plugin
-  server.register_help_message(conf.command, {'en_us': help_message}) # when !!help it shows help message
+  server.register_command(
+		Literal(conf.prefix)
+		.runs(execute)) #execute plugin
+  server.register_help_message(conf.prefix, {'en_us': help_message}) # when !!help it shows help message

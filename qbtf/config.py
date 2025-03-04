@@ -2,7 +2,7 @@ from mcdreforged.api.utils.serializer import Serializable
 
 # `Configure` is a class that contains the configuration for the `qb_multi` program
 class Configure(Serializable):
-    command: str = '!!qbtf'
+    prefix: str = '!!qbtf'
     source_path: str = './qb_multi/slot1'
     dest_path: str = './qbtf/'
     firebase_config: dict = {"databaseURL": ""}
