@@ -42,11 +42,11 @@ def upload_to_firebase(server: PluginServerInterface): #It uploads the zip file 
         firebase = pyrebase.initialize_app(conf.firebase_config)
         storage = firebase.storage()
         file = out_path +"."+ conf.extension
-        cloudfilename = (conf.fb_path + file)
+        server.get_server().logger.info(file)
+        cloudfilename = (conf.fb_path + conf.comp_name +"."+ conf.extension)
+        server.get_server().logger.info(cloudfilename)
         storage.child(cloudfilename).put(file)
-        server.get_server().logger.info("removing file")
         os.remove(file)
-        server.get_server().logger.info("file removed")
         print_msg(server, "§a[+]§r DONE")
     except KeyError:
         print_msg(server, "§c[-]§r ERROR")
