@@ -14,7 +14,7 @@ def print_msg(server: PluginServerInterface, msg: str, prefix='[QBTF] '):
 def compress_qb(server: PluginServerInterface): #It compresses the source code of the plugin into a zip file.
 	print_msg(server, "§a[+]§r §3Compressing...§r")
 	try:
-		shutil.make_archive(conf.comp_name, 'zip', conf.source_path)
+		shutil.make_archive(conf.comp_name, 'zip', conf.source_path, conf.dest_path)
 		print_msg(server, "§a[+]§r DONE")
 	except:
 		print_msg(server, "§c[-]§r Epic fail")
