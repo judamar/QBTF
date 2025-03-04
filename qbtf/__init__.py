@@ -35,15 +35,18 @@ def extract_qb(server: PluginServerInterface): #It extracts the source code of t
 	except:
 		print_msg(server, "§c[-]§r Epic fail")
 
-#TODO: remove qb_comp after uploading
+
 def upload_to_firebase(server: PluginServerInterface): #It uploads the zip file to Firebase Storage
     print_msg(server, "§a[+]§r §3Uploading to Firebase...§r")
     try:
         firebase = pyrebase.initialize_app(conf.firebase_config)
         storage = firebase.storage()
-        file = conf.comp_name + conf.extension
+        file = out_path +"."+ conf.extension
         cloudfilename = (conf.fb_path + file)
         storage.child(cloudfilename).put(file)
+        server.get_server().logger.info("removing file")
+        os.remove(file)
+        server.get_server().logger.info("file removed")
         print_msg(server, "§a[+]§r DONE")
     except KeyError:
         print_msg(server, "§c[-]§r ERROR")
@@ -64,15 +67,15 @@ def download_from_firebase(server: PluginServerInterface): #It downloads the zip
 
 @new_thread("QBTF execution")
 def execute(server: PluginServerInterface): #Executes 'comprimir_qb' and 'subirAFirebase' functions
-	compress_qb(server)
-	#upload_to_firebase(server)
+  compress_qb(server)
+  upload_to_firebase(server)
 
 #TODO: add !!qbtf upload and !!qbtf download commands using .then()
 def on_load(server: PluginServerInterface, old_module):
-	global conf #do conf global
-	check_folder(server) #check folder
-	conf = server.load_config_simple('config.json', target_class=Configure) #load config.json file to conf
-	msg = 'Plugin qbtf loaded, use {}'.format(conf.command) #message showed when server start
-	server.logger.info(msg) #displays message
-	server.register_command(Literal(conf.command).runs(execute)) #execute plugin
-	server.register_help_message(conf.command, {'en_us': help_message}) # when !!help it shows help message
+  global conf #do conf global
+  check_folder(server) #check folder
+  conf = server.load_config_simple('config.json', target_class=Configure) #load config.json file to conf
+  msg = 'Plugin qbtf loaded, use {}'.format(conf.command) #message showed when server start
+  server.logger.info(msg) #displays message
+  server.register_command(Literal(conf.command).runs(execute)) #execute plugin
+  server.register_help_message(conf.command, {'en_us': help_message}) # when !!help it shows help message
