@@ -10,7 +10,7 @@ help_head = """
 help_body = {
     f"§b{prefix}": "§rDisplay help message.",
     f"§b{prefix} upload": "§rUpload the Slot1 to Firebase storage.",
-    f"§b{prefix} download": "§rDownload the file."
+    f"§b{prefix} download": "§rDownload the file and extract in Slot1."
 }
 
 
