@@ -13,8 +13,6 @@ help_body = {
     f"§b{prefix} download": "§rDownload the file and extract in Slot1."
 }
 
-
-
 def gen_help_message():
     help_message = RTextList(
         RText(help_head),
