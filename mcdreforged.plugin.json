@@ -1,6 +1,6 @@
 {
 	"id": "qbtf",
-	"version": "1.2.0",
+	"version": "1.3.0",
 	"name": "QBTF",
 	"description": "!!qbtf to upload last backup (slot 1) to firebase storage",
 	"author": "judamar",
