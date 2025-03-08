@@ -25,3 +25,5 @@ def gen_help_message():
 def gen_unknown_argument_message():
     unknown_message = RText("Unknown argument.", color=RColor.red)
     return str(unknown_message)
+
+command_help_message = "Use !!qbtf to upload Slot1 (by default) to firebase."
