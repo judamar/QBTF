@@ -9,8 +9,8 @@ help_head = """
 """
 help_body = {
     f"§b{prefix}": "§rDisplay help message.",
-    f"§b{prefix} upload": "§rUpload the Slot1 to Firebase storage.",
-    f"§b{prefix} download": "§rDownload the file and extract in Slot1."
+    f"§b{prefix} upload": "§rUpload the slot1 (by default) to Firebase storage.",
+    f"§b{prefix} download": "§rDownload the file and extract in slot1 (by default)."
 }
 
 def gen_help_message():
