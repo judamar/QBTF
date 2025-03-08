@@ -10,7 +10,3 @@ class Configure(Serializable):
     comp_name: str = 'qb_comp'
     extension: str = 'zip'
     fb_path: str = 'smp/'
-
-# Defining a variable called `help_message` and assigning it the value of the string
-# "Use !!qbtf to upload Slot1 to firebase."
-help_message = "Use !!qbtf to upload Slot1 to firebase."
