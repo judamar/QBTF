@@ -100,4 +100,4 @@ def on_load(server: PluginServerInterface, old_module):
     msg = 'Plugin qbtf loaded, use {}'.format(conf.prefix) #message showed when server start
     server.logger.info(msg) #displays message
     register_command(server) #register command
-    server.register_help_message(conf.prefix, {'en_us': help_message}) # when !!help it shows help message
+    server.register_help_message(conf.prefix, {'en_us': command_help_message}) # when !!help it shows help message
