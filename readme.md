@@ -27,7 +27,6 @@ pip install pycryptodome
 pip install pyrebase4
 ```
 
-
 ## Configuration
 
 You can configure the plugin's behavior in the `config.json` file with the following options:
@@ -35,7 +34,7 @@ You can configure the plugin's behavior in the `config.json` file with the follo
 - **prefix**: Defines the prefix for the plugin's commands.
 - **source_path**: Path of the folder to be compressed and uploaded.
 - **dest_path**: Path where the downloaded backups will be stored.
-- **firebase_config**: Key provided by Firebase App Storage, follow this [tutorial](https://github.com/judamar/QBTF/blob/main/tutorials/key_tuto.md).
+- **firebase_config**: Key provided by Firebase App Storage, follow this [tutorial](./tutorials/key_tuto.md).
 - **permission**: Minimum permission level required to execute commands.
 - **comp_name**: Name of the compressed file.
 - **extension**: Backup file extension.
@@ -56,6 +55,3 @@ The plugin should work without additional modifications, as long as the Firebase
     "extension": "zip",
     "fb_path": "smp/"
 }
-
-- En `firebase_config` pones la "key" que sale en el storage de la app en firebase, puedes usar este  para guiarte.
-
